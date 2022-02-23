@@ -1,4 +1,4 @@
-
+.vscode
 api/node_modules
 client/node_modules
 api/.env
