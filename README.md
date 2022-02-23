@@ -1,6 +1,6 @@
 # Game Backlog Web Application
 
-Simple backlog organizer for video games. Built using React and Express. Still a WIP.
+Simple backlog organizer for video games. Built using React and Express, and the [GiantBomb API](https://www.giantbomb.com/api/). Still a WIP.
 
 ## Planned features
 
