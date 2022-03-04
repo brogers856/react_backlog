@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css"; 
 import './app.css';
 import { BrowserRouter, Routes, Route} from 'react-router-dom'
-import { NavHeader, Home, NotFound } from "./components";
+import { NavHeader, Home, NotFound, NavFooter } from "./components";
 
 function App() {
 
@@ -14,6 +14,7 @@ function App() {
             <Route path="*" element={<NotFound/>}/>
           </Route>
         </Routes>
+        <NavFooter/>
       </BrowserRouter>
     </>
   );

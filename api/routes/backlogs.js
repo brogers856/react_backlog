@@ -15,11 +15,8 @@ router.route('/:id')
     .put(backlogs.editBacklog)
     .post(upload.single("file"), backlogs.addItem)
 
-router.route(':id/items')
+router.route('/:id/items')
     .put(backlogs.editItems)
-
-router.route('/:bid/items/:iid/edit')
-    .get(backlogs.showItemEdit)
 
 router.route('/:bid/items/:iid')
     .put(upload.single("file"), backlogs.editItem)

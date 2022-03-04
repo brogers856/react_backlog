@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { OverlayTrigger, Button, Tooltip, Modal, Container, Row, Col, Table } from "react-bootstrap";
-import { EditItemModal } from "..";
+import { EditItemModal, BacklogContext } from "..";
+import {useSortable} from '@dnd-kit/sortable';
+import {CSS} from '@dnd-kit/utilities';
+
 
 const Item = (props) => {
+    const context = useContext(BacklogContext)
     const [showInfo, setShowInfo] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+      } = useSortable({id: props.data._id})
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition
+      };
 
     const openModal = () => {
         setShowInfo(false);
@@ -17,12 +32,12 @@ const Item = (props) => {
 
     return (
         <>
-            <div id={props.data._id} className="item d-flex flex-column align-items-center">
-                <img className="image itemImage" src={props.data.imageThumb} />
+            <div ref={setNodeRef} style={style} id={props.data._id} className="item d-flex flex-column align-items-center" onClick={() => context.moveItem(0,1, props.bid)}>
+                <img className="image itemImage" src={props.data.imageThumb}/>
                 <div className="d-flex align-items-center mt-2">
-                    <div className="num me-4">
-                        {'#' + (props.pos + 1)}
-                    </div>
+                    <Button variant="primary" className="button itemButton infoButton mx-1" onClick={() => setShowInfo(true)} {...attributes} {...listeners}>
+                        <div className="bi bi-arrows-move itemIcon icon"></div>
+                    </Button>
                     <OverlayTrigger placement="top" overlay={<Tooltip id={`tooltip-top`}>Item info</Tooltip>}>
                         <Button variant="primary" className="button itemButton infoButton mx-1" onClick={() => setShowInfo(true)}>
                             <div className="bi bi-info itemIcon icon"></div>
@@ -115,6 +130,7 @@ const Item = (props) => {
                     <Button variant="primary" className="btn-custom" onClick={() => setShowInfo(false)}>Close</Button>
                 </Modal.Footer>
             </Modal>
+
         </>
     )
 }

@@ -82,15 +82,9 @@ module.exports.addItem = async (req, res) => {
 
 module.exports.editItems = async (req, res) => {
     const { id } = req.params;
-    await Backlog.findByIdAndUpdate(id, { items: req.body.arr }, { runValidators: true, useFindAndModify: false })
+    console.log(req.body)
+    await Backlog.findByIdAndUpdate(id, { items: req.body }, { runValidators: true, useFindAndModify: false })
     res.end();
-}
-
-module.exports.showItemEdit = async (req, res) => {
-    const { bid, iid } = req.params;
-    const backlog = await Backlog.findById(bid);
-    const item = backlog.items.id(iid);
-    res.render('edit', { bid, item });
 }
 
 module.exports.editItem = async (req, res) => {

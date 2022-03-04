@@ -1,6 +1,19 @@
+html {
+    height: 100vh;
+}
+
 body {
     background: #414247;
     font-family: 'Roboto', sans-serif;
+    height: 100%;
+}
+
+#root {
+    display:flex; 
+    flex-direction:column; 
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .header {
@@ -11,6 +24,10 @@ body {
     color: ivory;
     border-bottom: solid 2px rgba(245, 245, 245, 0.125);
     font-size: 3em;
+}
+
+#newButtonContainer {
+    margin-bottom: 150px;
 }
 
 #mainNavbar {
@@ -36,6 +53,18 @@ body {
 
 #mainNavbar .nav-link:hover {
     border: solid 2px ivory;
+}
+
+.footer-text {
+    color: ivory;
+}
+
+.footer-link {
+    color: rgb(214, 91, 91);
+}
+
+.footer-link:hover {
+    color: rgb(167, 67, 67);
 }
 
 .backlog {
