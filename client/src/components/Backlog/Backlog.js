@@ -3,8 +3,7 @@ import { AddItemModal } from '..';
 import { useContext, useState } from 'react';
 import React from 'react';
 import { Item, Loading, BacklogContext } from '..';
-import { DragOverlay } from '@dnd-kit/core';
-import {SortableContext} from '@dnd-kit/sortable'
+import { SortableContext } from '@dnd-kit/sortable';
 
 const Backlog = (props) => {
     const context = useContext(BacklogContext)
@@ -55,14 +54,9 @@ const Backlog = (props) => {
                 </Row>
                 <Row className='justify-content-center'>
                     <Col lg='8' className='itemContainer d-flex flex-wrap justify-content-center'>
-                        <SortableContext items={props.items.map(item => item._id)} id={props.id}>
+                        <SortableContext key={props.id} items={props.items.map(item => item._id)} id={props.id}>
                             {props.items.map((item) => {
-                                return (
-                                    <>
-                                        <Item key={item._id} bid={props.id} data={item} pos={props.items.indexOf(item)} deleteHandler={deleteModal} />
-                                        <DragOverlay>{context.draggingValue ? <Item key={item._id} bid={props.id} data={item} /> : null}</DragOverlay>
-                                    </>
-                                )
+                                return <Item key={item._id} bid={props.id} data={item} pos={props.items.indexOf(item)} deleteHandler={deleteModal}/>
                             })}
                         </SortableContext>
                     </Col>

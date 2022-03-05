@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { OverlayTrigger, Button, Tooltip, Modal, Container, Row, Col, Table } from "react-bootstrap";
-import { EditItemModal, BacklogContext } from "..";
-import {useSortable} from '@dnd-kit/sortable';
+import { EditItemModal, BacklogContext, DragItem } from "..";
+import { useSortable } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
 
@@ -15,10 +15,12 @@ const Item = (props) => {
         setNodeRef,
         transform,
         transition,
+        isDragging
       } = useSortable({id: props.data._id})
     const style = {
         transform: CSS.Transform.toString(transform),
-        transition
+        transition,
+        opacity: isDragging ? 0.5 : undefined,
       };
 
     const openModal = () => {
@@ -32,7 +34,7 @@ const Item = (props) => {
 
     return (
         <>
-            <div ref={setNodeRef} style={style} id={props.data._id} className="item d-flex flex-column align-items-center" onClick={() => context.moveItem(0,1, props.bid)}>
+            <div ref={setNodeRef} style={style} id={props.data._id} className="item d-flex flex-column align-items-center">
                 <img className="image itemImage" src={props.data.imageThumb}/>
                 <div className="d-flex align-items-center mt-2">
                     <Button variant="primary" className="button itemButton infoButton mx-1" onClick={() => setShowInfo(true)} {...attributes} {...listeners}>
