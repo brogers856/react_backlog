@@ -2,9 +2,14 @@
 
 Simple backlog organizer for video games. Built using React and Express, and the [GiantBomb API](https://www.giantbomb.com/api/). Still a WIP.
 
+## Current features
+
+- GiantBomb API integration
+- Manual item creation
+- Drag and drop reordering
+
 ## Planned features
 
-- Drag and drop reordering of items
 - User registration
 - Error handling and response
 - Style cleanup

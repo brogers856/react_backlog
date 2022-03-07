@@ -1,12 +1,11 @@
-import { useState, useContext } from "react";
+import { useState} from "react";
 import { OverlayTrigger, Button, Tooltip, Modal, Container, Row, Col, Table } from "react-bootstrap";
-import { EditItemModal, BacklogContext, DragItem } from "..";
+import { EditItemModal } from "..";
 import { useSortable } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
 
 
 const Item = (props) => {
-    const context = useContext(BacklogContext)
     const [showInfo, setShowInfo] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const {
@@ -15,7 +14,7 @@ const Item = (props) => {
         setNodeRef,
         transform,
         transition,
-        isDragging
+        isDragging,
       } = useSortable({id: props.data._id})
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -35,7 +34,7 @@ const Item = (props) => {
     return (
         <>
             <div ref={setNodeRef} style={style} id={props.data._id} className="item d-flex flex-column align-items-center">
-                <img className="image itemImage" src={props.data.imageThumb}/>
+                <img className="image itemImage rounded" src={props.data.imageThumb}/>
                 <div className="d-flex align-items-center mt-2">
                     <Button variant="primary" className="button itemButton infoButton mx-1" onClick={() => setShowInfo(true)} {...attributes} {...listeners}>
                         <div className="bi bi-arrows-move itemIcon icon"></div>
@@ -46,7 +45,7 @@ const Item = (props) => {
                         </Button>
                     </OverlayTrigger>
                     <OverlayTrigger placement="top" overlay={<Tooltip id={`tooltip-top`}>Delete item</Tooltip>}>
-                        <Button variant="primary" className="button itemButton deleteButton" onClick={() => props.deleteHandler(props.data._id)}>
+                        <Button variant="primary" className="button itemButton deleteButton mx-1" onClick={() => props.deleteHandler(props.data._id)}>
                             <div className="bi bi-trash itemIcon icon"></div>
                         </Button>
                     </OverlayTrigger>
@@ -55,7 +54,7 @@ const Item = (props) => {
 
             <EditItemModal bid={props.bid} data={props.data} show={showEdit} closeModal={closeModal}/>
 
-            <Modal size="lg" show={showInfo} onHide={() => setShowInfo(false)}>
+            <Modal size="lg" show={showInfo} onHide={() => setShowInfo(false)} centered>
                 <Modal.Header>
                     <Container>
                         <Row>
@@ -69,7 +68,7 @@ const Item = (props) => {
                     <Container className="infoContainer">
                         <Row>
                             <Col lg={5} className="infoCol"> 
-                                <img className="image infoImage" src={props.data.image}/>
+                                <img className="image infoImage rounded" src={props.data.image} />
                             </Col>
                             <Col lg={7}>
                                 <div>

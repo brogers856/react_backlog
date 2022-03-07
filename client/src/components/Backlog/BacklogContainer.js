@@ -50,7 +50,7 @@ const BacklogContainer = () => {
 
             <NewBacklogButton />
             
-            <Modal show={showDelete}>
+            <Modal show={showDelete} centered>
                 <Modal.Body>
                     <p>Are you sure you want to delete this backlog? All items will be deleted.</p>
                 </Modal.Body>
@@ -60,7 +60,7 @@ const BacklogContainer = () => {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={showEdit} onHide={() => setShowEdit(false)}>
+            <Modal show={showEdit} onHide={() => setShowEdit(false)} centered>
                 <Modal.Body>
                     <Form>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">

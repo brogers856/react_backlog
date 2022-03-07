@@ -1,9 +1,8 @@
 import { Container, Row, Col, ButtonGroup, OverlayTrigger, Tooltip, Button, Modal} from 'react-bootstrap'
-import { AddItemModal } from '..';
+import { AddItemModal, ItemContainer } from '..';
 import { useContext, useState } from 'react';
 import React from 'react';
-import { Item, Loading, BacklogContext } from '..';
-import { SortableContext } from '@dnd-kit/sortable';
+import { Loading, BacklogContext } from '..';
 
 const Backlog = (props) => {
     const context = useContext(BacklogContext)
@@ -32,7 +31,7 @@ const Backlog = (props) => {
                     <Col lg='8' className='backlog firstBacklog px-0'>
                         <div className="labelHolder d-flex align-items-center px-2">
                             <span className="label">{props.name}</span>
-                            <ButtonGroup className='d-flex ms-auto'>
+                            <ButtonGroup className='backlog-buttons d-flex ms-auto'>
                                 <OverlayTrigger placement="top" overlay={<Tooltip id={`tooltip-top`}>Add item</Tooltip>}>
                                     <Button variant="primary" className="button backlogButton btn-custom addItem" onClick={() => setShowAdd(true)}>
                                         <div className="bi bi-plus-square backlogIcon icon"></div>
@@ -53,19 +52,15 @@ const Backlog = (props) => {
                     </Col>
                 </Row>
                 <Row className='justify-content-center'>
-                    <Col lg='8' className='itemContainer d-flex flex-wrap justify-content-center'>
-                        <SortableContext key={props.id} items={props.items.map(item => item._id)} id={props.id}>
-                            {props.items.map((item) => {
-                                return <Item key={item._id} bid={props.id} data={item} pos={props.items.indexOf(item)} deleteHandler={deleteModal}/>
-                            })}
-                        </SortableContext>
+                    <Col lg='8'>
+                        <ItemContainer id={props.id} items={props.items} deleteHandler={deleteModal}/>
                     </Col>
                 </Row>
             </Container>
 
             <AddItemModal id={props.id} show={showAdd} closeModal={closeAddModal} />
 
-            <Modal show={showDelete} onHide={() => setShowDelete(false)}>
+            <Modal show={showDelete} onHide={() => setShowDelete(false)} centered>
                 <Modal.Body>
                     <p>Are you sure you want to delete this item? This cannot be undone.</p>
                 </Modal.Body>

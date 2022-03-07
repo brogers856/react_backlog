@@ -52,7 +52,7 @@ const AddItemModal = (props) => {
     }
 
     return (
-        <Modal show={props.show} onHide={() => props.closeModal()}>
+        <Modal show={props.show} onHide={() => props.closeModal()} centered>
             <Modal.Body>
                 {manualMode ? (
                     <Form id="manual-submit" onSubmit={handleManualSubmit}>

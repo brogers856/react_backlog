@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BacklogContainer, BacklogContext, DragItem } from "."
-import { DndContext, useSensors, useSensor, PointerSensor, KeyboardSensor, closestCenter, DragOverlay } from '@dnd-kit/core';
+import { DndContext, useSensors, useSensor, PointerSensor, KeyboardSensor, TouchSensor, closestCenter, DragOverlay } from '@dnd-kit/core';
 import { sortableKeyboardCoordinates, arrayMove } from '@dnd-kit/sortable'
 
 const Home = () => {
@@ -11,7 +11,9 @@ const Home = () => {
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
-    })
+    }),
+    useSensor(TouchSensor)
+
   );
 
   const fetchBacklogs = async () => {
@@ -110,10 +112,9 @@ const Home = () => {
   const findBacklog = (id) => {
     let b = null
     backlogsValue.forEach((backlog) => {
+        if(backlog._id === id) b = backlog
       backlog.items.forEach((item) => {
-        if (item._id === id) {
-          b = backlog
-        }
+        if (item._id === id) b = backlog
       })
     })
     return b

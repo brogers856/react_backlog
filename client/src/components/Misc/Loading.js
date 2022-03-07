@@ -3,7 +3,7 @@ import { Container, Row, Col, Spinner, Modal } from 'react-bootstrap'
 const Loading = () => {
 
     return (
-        <Modal show={true}>
+        <Modal show={true} centered>
             <Modal.Body>
                 <Container className='d-flex flex-column justify-content-center align-items-center'>
                     <Row>

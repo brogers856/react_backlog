@@ -14,7 +14,7 @@ const EditItemModal = (props) => {
     }
 
     return (
-        <Modal show={props.show} onHide={props.setShow} onSubmit={handleSubmit}>
+        <Modal show={props.show} onHide={props.setShow} onSubmit={handleSubmit} centered>
             <Modal.Body>
                 <Container>
                     <Form id="edit-item">

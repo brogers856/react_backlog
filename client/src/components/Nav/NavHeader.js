@@ -11,7 +11,10 @@ const NavHeader = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <NavLink href="#github">Github</NavLink>
+                            <NavLink href="https://github.com/brogers856/react_backlog">
+                                <i className="bi bi-github me-1"/>
+                                Github
+                            </NavLink>
                         <NavLink href="#help">Help</NavLink>
                         <NavLink href="#register">Register</NavLink>
                         <NavLink href="#login">Log In</NavLink>
