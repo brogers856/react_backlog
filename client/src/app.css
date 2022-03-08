@@ -154,6 +154,26 @@ body {
     
 }
 
+.tag-item {
+    background-color: rgb(112, 112, 112);
+    margin-top: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.tag-span {
+    padding: 0.25rem;
+}
+
+.tag-btn {
+    margin-right: 0.1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    height: 20px;
+    width: 20px;
+}
+
 .btn-primary:focus {
     background-color: rgb(129, 54, 54);
     border-color: rgb(187, 79, 79);

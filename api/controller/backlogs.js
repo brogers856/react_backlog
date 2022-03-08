@@ -1,23 +1,13 @@
 const Backlog = require('../models/backlog');
 const axios = require('axios')
 
-function convertArray(str) {
-    return str.split(',');
-}
-
-function manualFormat(body) {
-    if (body.genres == "") body.genres = null;
-    if (body.platforms == "") body.platforms = null;
-    if (body.dev == "") body.dev = null;
-    if (body.genres) {
-        body.genres = convertArray(body.genres)
-    }
-    if (body.platforms) {
-        body.platforms = convertArray(body.platforms)
-    }
-    if (body.dev) {
-        body.dev = convertArray(body.dev)
-    }
+function parseBody(body) {
+    console.log(body.genres)
+    console.log(body.platforms)
+    console.log(body.dev)
+    body.genres = JSON.parse(body.genres)
+    body.platforms = JSON.parse(body.platforms)
+    body.dev = JSON.parse(body.dev)
     return body;
 }
 
@@ -26,10 +16,10 @@ async function apiAdd(query) {
     let data = response.data.results
     const body = {
         title: data.name,
-        dev: data.developers ? data.developers.map(a => a.name) : ["None listed"],
+        dev: data.developers ? data.developers.map(a => a.name) : [],
         date: data.original_release_date,
-        genres: data.genres ? data.genres.map(a => a.name) : ["None listed"],
-        platforms: data.platforms ? data.platforms.map(a => a.name) : ["None listed"],
+        genres: data.genres ? data.genres.map(a => a.name) : [],
+        platforms: data.platforms ? data.platforms.map(a => a.name) : [],
         desc: data.deck,
         image: data.image.medium_url,
         imageThumb: data.image.thumb_url
@@ -70,7 +60,7 @@ module.exports.addItem = async (req, res) => {
     const { id } = req.params;
     let body = req.body
     if (req.query.type === 'manual') {
-        body = manualFormat(body);
+        body = parseBody(body);
         body.image = req.file.path.replace('/upload', '/upload/h_285/w_360');
         body.imageThumb = req.file.path.replace('/upload', '/upload/h_90/w_120');
     } 
@@ -78,18 +68,17 @@ module.exports.addItem = async (req, res) => {
     const backlog = await Backlog.find({ _id: id })
     const item = await backlog[0].addItem(body)
     res.status(200).end();
-}
+ }
 
 module.exports.editItems = async (req, res) => {
     const { id } = req.params;
-    console.log(req.body)
     await Backlog.findByIdAndUpdate(id, { items: req.body }, { runValidators: true, useFindAndModify: false })
     res.end();
 }
 
 module.exports.editItem = async (req, res) => {
     const { bid, iid } = req.params;
-    let body = manualFormat(req.body);
+    let body = parseBody(req.body);
     const backlog = await Backlog.findById(bid);
     const items = backlog.items;
     const item = items.id(iid);

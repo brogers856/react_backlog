@@ -88,7 +88,7 @@ const Item = (props) => {
                                                 <th className="infoList">Developers</th>
                                                 <td>
                                                     <div className="infoTag">
-                                                        {props.data.dev ? props.data.dev.map((dev) => { return <div key={dev} className="d-block infoTag">{dev}</div>; })
+                                                        {props.data.dev.length > 0 ? props.data.dev.map((dev, i) => { return <div key={i} className="d-block infoTag">{dev}</div>; })
                                                             : "None Listed"
                                                         }
                                                     </div>
@@ -98,7 +98,7 @@ const Item = (props) => {
                                                 <th>Genres</th>
                                                 <td>
                                                     <div className="infoTag">
-                                                        {props.data.genres ? props.data.genres.map((genre) => { return <div key={genre} className="d-block infoTag">{genre}</div>; })
+                                                        {props.data.genres.length > 0 ? props.data.genres.map((genre, i) => { return <div key={i} className="d-block infoTag">{genre}</div>; })
                                                             : "None Listed"
                                                         }
                                                     </div>
@@ -108,7 +108,7 @@ const Item = (props) => {
                                                 <th>Platforms</th>
                                                 <td>
                                                     <div className="infoTag">
-                                                        {props.data.platforms ? props.data.platforms.map((platform) => { return <div key={platform} className="d-block infoTag">{platform}</div>; })
+                                                        {props.data.platforms.length > 0 ? props.data.platforms.map((platform, i) => { return <div key={i} className="d-block infoTag">{platform}</div>; })
                                                             : "None Listed"
                                                         }
                                                     </div>
