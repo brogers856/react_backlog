@@ -1,6 +1,9 @@
 import { Card, Container, Row, Col } from 'react-bootstrap'
+import { useNavigate } from 'react-router';
 
 const NotFound = () => {
+    const navigate = useNavigate()
+
     return (
         <Container className='container-404'>
             <Row>
@@ -11,7 +14,7 @@ const NotFound = () => {
                             <Card.Text>
                                 Sorry, the page you requested doesn't exist
                             </Card.Text>
-                            <Card.Link href="/">Go back home</Card.Link>
+                            <Card.Link onClick={() => {navigate("/")}}>Go back home</Card.Link>
                         </Card.Body>
                     </Card>
                 </Col>

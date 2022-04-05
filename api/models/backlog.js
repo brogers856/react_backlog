@@ -26,6 +26,10 @@ const backlogSchema = new mongoose.Schema({
     items: {
         type: [itemSchema],
         required: true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 
@@ -40,8 +44,9 @@ backlogSchema.methods.addItem = async function (itemSchema) {
     return this.items[this.items.length - 1]
 }
 
-backlogSchema.statics.addBacklog = async function (data) {
-    const newBacklog = new Backlog(data);
+backlogSchema.statics.addBacklog = async function (req) {
+    const newBacklog = new Backlog(req.body);
+    newBacklog.owner = req.user._id;
     await newBacklog.save();
     return newBacklog;
 }

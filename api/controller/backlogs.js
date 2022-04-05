@@ -28,7 +28,7 @@ async function apiAdd(query) {
 }
 
 module.exports.index = async (req, res) => {
-    const backlogs = await Backlog.find({});
+    const backlogs = await Backlog.find({ owner: req.user._id});
     res.status(200).send(backlogs)
 }
 
@@ -39,14 +39,15 @@ module.exports.getBacklogs = async (req, res) => {
 }
 
 module.exports.createBacklog = async (req, res) => {
-    const backlog = await Backlog.addBacklog(req.body);
+    const backlog = await Backlog.addBacklog(req);
     res.status(200).send(backlog).end();
 }
 
 module.exports.deleteBacklog = async (req, res) => {
     const { id } = req.params
     await Backlog.deleteOne({ _id: id })
-    res.status(200).end();
+    console.log(req.sessionID)
+    res.status(200).send(req.sessionID);
 }
 
 module.exports.editBacklog = async (req, res) => {

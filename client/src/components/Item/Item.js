@@ -18,7 +18,7 @@ const Item = (props) => {
       } = useSortable({id: props.data._id})
     const style = {
         transform: CSS.Transform.toString(transform),
-        transition,
+        transition: null,
         opacity: isDragging ? 0.5 : undefined,
       };
 

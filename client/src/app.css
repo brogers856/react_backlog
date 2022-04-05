@@ -17,7 +17,7 @@ body {
 }
 
 .header {
-    margin-top: 100px;
+    margin-top: 1rem;
 }
 
 .header h1 {
@@ -33,6 +33,7 @@ body {
 #mainNavbar {
     border-bottom: solid 1px rgba(245, 245, 245, 0.125);
     background: #414247;
+    position: sticky;
 }
 
 #mainNavbar .navbar-brand {
@@ -275,6 +276,27 @@ body {
 
 .card-404 a {
     color: rgb(214, 91, 91);
+}
+
+.auth-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-row {
+    width: 100%;
+}
+
+.register-form {
+    margin-top: 3rem;
+    width: 50%;
+}
+
+.login-form {
+    margin-top: 3rem;
+    width: 50%;
 }
 
 @media (max-width: 767px) {
