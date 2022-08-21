@@ -16,7 +16,8 @@ const BacklogContainer = () => {
         context.fetchBacklogs();
     }, [])
 
-    const editBacklog = async () => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
         context.editBacklog(editID, editName)
         setShowEdit(false);
     }
@@ -62,7 +63,7 @@ const BacklogContainer = () => {
 
             <Modal show={showEdit} onHide={() => setShowEdit(false)} centered>
                 <Modal.Body>
-                    <Form>
+                    <Form id="name-form" onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Backlog Name</Form.Label>
                             <Form.Control type="text" defaultValue={editName} onChange={(event) => setEditName(event.target.value)}/>
@@ -71,7 +72,7 @@ const BacklogContainer = () => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowEdit(false)}>Cancel</Button>
-                    <Button variant="primary" className="btn-custom" onClick={editBacklog}>Save Changes</Button>
+                    <Button form="name-form" variant="primary" className="btn-custom" type="submit">Save Changes</Button>
                 </Modal.Footer>
             </Modal>
         </>

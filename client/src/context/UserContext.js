@@ -27,7 +27,7 @@ const UserProvider = (props) => {
         })
         var body = await res.text()
         if (res.status == 200) {
-            toast(body)
+            toast.success(body)
             setState(true)
             navigate("/")
         } else toast.error(body)
@@ -45,7 +45,7 @@ const UserProvider = (props) => {
         })
         var body = await res.text()
         if (res.status == 200) {
-            toast(body)
+            toast.success(body)
             setState(true)
             navigate("/")
         }
@@ -58,7 +58,7 @@ const UserProvider = (props) => {
         })
         var body = await res.text()
         if (res.status == 200) {
-            toast(body)
+            toast.success(body)
             setState(false)
             navigate("/")
         }
